@@ -11,7 +11,7 @@ let getComputerChoice = () => {
 
 }
 
-let start = (playerSelection, computerSelection) => {
+let playRound = (playerSelection, computerSelection) => {
     playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase()
 
     if (playerSelection === computerSelection) {
@@ -31,4 +31,23 @@ let start = (playerSelection, computerSelection) => {
     } 
 
     return `${playerSelection} is not a valid input`
+}
+
+let game = () => {
+    let score = 0
+    let computerScore = 0
+
+    for (let i = 0; i < 5; i++) {
+        let input = prompt("Rock, Paper, or Scissors?")
+        let computerInput = getComputerChoice()
+
+        result = playRound(input, computerInput)
+        console.log(result)
+        if (result.includes("lose")) {
+            computerScore++
+        } else if (result.includes("win")) {
+            score++
+        }
+    }
+    console.log(`Final score! You: ${score}  Computer: ${computerScore}`)
 }
