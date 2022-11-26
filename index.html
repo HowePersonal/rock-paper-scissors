@@ -2,10 +2,21 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="code.js"></script>
+        <script src="code.js" defer></script>
+        <link rel="stylesheet" type = "text/css" href="styles.css" />
     </head>
 
     <body>
+        <h1 id = "score">Score: 0</h1>
+        <div id = "buttons">
+            <h1 id = "textfield">Pick: Rock, Paper, or Scissors</h1>
+            <div>
+                <button type="button" id = "rock" onclick = "userChoice('Rock')">Rock</button>
+                <button type="button" id = "paper" onclick = "userChoice('Paper')">Paper</button>
+                <button type="button" id = "scissors" onclick = "userChoice('Scissors')">Scissors</button>
+            </div>
 
-    </body>
+        </div>
+        
+    </body> 
 </html>

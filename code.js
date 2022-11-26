@@ -1,3 +1,13 @@
+const body = document.body
+const score = document.getElementById('score')
+const displayText = document.getElementById('textfield')
+
+const buttonRock = document.getElementById('rock')
+const buttonPaper = document.getElementById('paper')
+const buttonScissors = document.getElementById('scissors')
+
+var userScore = 0
+
 let getComputerChoice = () => {
     let randomNum = Math.floor(Math.random() * 3)
     
@@ -11,43 +21,44 @@ let getComputerChoice = () => {
 
 }
 
-let playRound = (playerSelection, computerSelection) => {
-    playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase()
+let updateScore = (result) => {
+    if (result == 0 && userScore > 0) {
+        userScore += 1
+    } 
+    else if (result == 1) {
+        userScore += 1
+    }
+    score.innerText = "Score: " + userScore
+}
 
+let userChoice = (playerSelection) => {
+    let computerSelection = getComputerChoice()
     if (playerSelection === computerSelection) {
-        return `Tied! Both used ${computerSelection}`
+        displayText.innerText = `Tied! Both used ${computerSelection}`
     } else if (playerSelection === 'Rock' && computerSelection === 'Paper') {
-        return `You lose! Rock is beaten by Paper!`
+        displayText.innerText = `You lose! Rock is beaten by Paper!` 
+        updateScore(0)
     } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
-        return `You win! Rock beats Scissors!`
+        displayText.innerText = `You win! Rock beats Scissors!`
+        updateScore(1)
     } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
-        return `You win! Paper beats Rock!`
+        displayText.innerText = `You win! Paper beats Rock!`
+        updateScore(1)
     } else if (playerSelection === 'Paper' && computerSelection === 'Scissors') {
-        return `You lose! Paper is beaten by Scissors!`
+        displayText.innerText = `You lose! Paper is beaten by Scissors!`
+        updateScore(0)
     } else if (playerSelection === 'Scissors' && computerSelection === 'Rock') {
-        return `You lose! Scissor is beaten by Rock!`
+        displayText.innerText = `You lose! Scissor is beaten by Rock!`
+        updateScore(0)
     } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
-        return `You win! Scissor beats Paper!`
+        displayText.innerText = `You win! Scissor beats Paper!`
+        updateScore(1)
     } 
 
-    return `${playerSelection} is not a valid input`
-}
-
-let game = () => {
-    let score = 0
-    let computerScore = 0
-
-    for (let i = 0; i < 5; i++) {
-        let input = prompt("Rock, Paper, or Scissors?")
-        let computerInput = getComputerChoice()
-
-        result = playRound(input, computerInput)
-        console.log(result)
-        if (result.includes("lose")) {
-            computerScore++
-        } else if (result.includes("win")) {
-            score++
-        }
+    if (userScore >= 5) {
+        buttonRock.style.visibility = 'hidden'
+        buttonPaper.style.visibility = 'hidden'
+        buttonScissors.style.visibility = 'hidden'
     }
-    console.log(`Final score! You: ${score}  Computer: ${computerScore}`)
 }
+
